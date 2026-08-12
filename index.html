@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLODOR Test Store</title>
+
+  <!-- Paste your Meta Pixel base code here later -->
+  <!-- META PIXEL CODE -->
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f6f6;
+      color: #222;
+    }
+    header {
+      background: #111;
+      color: white;
+      padding: 22px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 6px; letter-spacing: 2px; }
+    header p { margin: 0; color: #ddd; }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+    .product-image {
+      height: 180px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ddd, #fff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      margin-bottom: 16px;
+    }
+    .price { font-size: 22px; font-weight: bold; margin: 10px 0; }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px;
+      background: #111;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { opacity: .85; }
+    .cart {
+      margin-top: 35px;
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+    #checkoutBtn { margin-top: 15px; background: #1677ff; }
+    .empty { color: #777; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>OLODOR</h1>
+    <p>Test Ecommerce Website — Meta Pixel Training</p>
+  </header>
+
+  <main class="container">
+    <h2>Our Products</h2>
+
+    <section class="products">
+      <div class="card">
+        <div class="product-image">🌹</div>
+        <h3>VELUURA ELIXIR</h3>
+        <p>Premium fragrance — training product.</p>
+        <div class="price">EGP 750</div>
+        <button onclick="addToCart('VELUURA ELIXIR', 750)">Add to Cart</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image">✨</div>
+        <h3>OLODOR BODY SPLASH</h3>
+        <p>Fresh body splash — training product.</p>
+        <div class="price">EGP 450</div>
+        <button onclick="addToCart('OLODOR BODY SPLASH', 450)">Add to Cart</button>
+      </div>
+    </section>
+
+    <section class="cart">
+      <h2>Shopping Cart</h2>
+      <div id="cartContent" class="empty">Your cart is empty.</div>
+      <button id="checkoutBtn" onclick="checkout()" style="display:none;">Proceed to Checkout</button>
+    </section>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({name, price});
+      renderCart();
+
+      // Later, after installing Meta Pixel, you can add:
+      // fbq('track', 'AddToCart', {content_name: name, value: price, currency: 'EGP'});
+    }
+
+    function renderCart() {
+      const box = document.getElementById('cartContent');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (cart.length === 0) {
+        box.innerHTML = '<span class="empty">Your cart is empty.</span>';
+        checkoutBtn.style.display = 'none';
+        return;
+      }
+
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      box.innerHTML =
+        cart.map(item => `<p><strong>${item.name}</strong> — EGP ${item.price}</p>`).join('') +
+        `<hr><strong>Total: EGP ${total}</strong>`;
+
+      checkoutBtn.style.display = 'block';
+    }
+
+    function checkout() {
+      // Simulates InitiateCheckout for training.
+      window.location.href = 'checkout.html';
+    }
+  </script>
+</body>
+</html>

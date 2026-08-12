@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - OLODOR Test Store</title>
+
+  <!-- Paste the SAME Meta Pixel base code here later -->
+  <!-- META PIXEL CODE -->
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f6f6f6; margin:0; }
+    .box { max-width:550px; margin:60px auto; background:white; padding:30px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,.08); }
+    input { width:100%; padding:13px; margin:8px 0 15px; border:1px solid #ddd; border-radius:8px; }
+    button { width:100%; padding:14px; border:0; border-radius:8px; background:#111; color:white; font-size:16px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Checkout</h1>
+    <p>This is a training checkout page.</p>
+
+    <label>Name</label>
+    <input id="name" placeholder="Your name">
+
+    <label>Phone</label>
+    <input id="phone" placeholder="01xxxxxxxxx">
+
+    <button onclick="completeOrder()">Complete Test Order</button>
+  </div>
+
+  <script>
+    // After installing the Pixel, you can test:
+    // fbq('track', 'InitiateCheckout');
+
+    function completeOrder() {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+
+      if (!name || !phone) {
+        alert('Please enter your name and phone.');
+        return;
+      }
+
+      window.location.href = 'thank-you.html';
+    }
+  </script>
+</body>
+</html>
